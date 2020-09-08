@@ -120,7 +120,7 @@ export function toggleTodo(id) {
       return {
         ...todo,
         done: !todo.done,
-        doneAt: Date.now(),
+        doneAt: !todo.done ? Date.now() : null,
        }
     });
 

@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Check, TrashFill } from 'react-bootstrap-icons';
+import { X, Check, TrashFill } from 'react-bootstrap-icons';
 
 import TodoBox from './TodoBox';
 import { IconButton } from '../common';
 import { toggleTodo, updateTodo, deleteTodo } from '../../store/todosSlice';
 import { getFormattedDate } from '../../utils/getFormattedDate';
+import './Todo.css';
 
 const Todo = props => {
   const { todo } = props;
@@ -20,15 +21,16 @@ const Todo = props => {
 
   return (
     <div className={`todos__item${ done ? ' todos__item-done' : ''}`}>
-      <p onClick={() => setIsBoxActive(!isBoxActive)}>{ description }</p>
-      <IconButton onClick={() => dispatch(toggleTodo(id))}>
-        <Check />
-      </IconButton>
-      <IconButton onClick={() => dispatch(deleteTodo(id))}>
-        <TrashFill />
-      </IconButton>
-      <button onClick={() => dispatch(deleteTodo(id))}>Supprimer</button>
-      { doneAt ? <p>{ getFormattedDate(doneAt) }</p> : null}
+      <div className="todos__content">
+        <p className="todos__description" onClick={() => setIsBoxActive(!isBoxActive)}>{ description }</p>
+        <IconButton onClick={() => dispatch(toggleTodo(id))} style={{ backgroundColor: 'var(--primary-color)' }}>
+          { done ? <X size={20} /> : <Check size={20} /> }
+        </IconButton>
+        <IconButton onClick={() => dispatch(deleteTodo(id))} style={{ backgroundColor: 'var(--secondary-color)' }}>
+          <TrashFill size={20} />
+        </IconButton>
+      </div>
+      { doneAt ? <p className="todos__date">Fais le { getFormattedDate(doneAt) }</p> : null}
       <TodoBox isActive={isBoxActive} todo={todo} dispatchUpdate={dispatchUpdate} />
     </div>
   )

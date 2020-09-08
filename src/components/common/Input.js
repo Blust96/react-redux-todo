@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Input.css';
+
 const TodoInput = props => {
   const { submit, setValue, value } = props;
 
@@ -13,7 +15,7 @@ const TodoInput = props => {
     }
   }
  
-  return <input type='text' placeholder="ex: To meow" onKeyDown={handleKeyDown} onChange={handleChange} value={value} />
+  return <input class="input" type='text' placeholder="ex: To meow" onKeyDown={handleKeyDown} onChange={handleChange} value={value} />
 }
 
 export default TodoInput;
