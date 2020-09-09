@@ -31,7 +31,7 @@ const Todo = props => {
         </IconButton>
       </div>
       { doneAt ? <p className="todos__date">Fais le { getFormattedDate(doneAt) }</p> : null}
-      <TodoBox isActive={isBoxActive} todo={todo} dispatchUpdate={dispatchUpdate} />
+      { isBoxActive ? <TodoBox todo={todo} dispatchUpdate={dispatchUpdate} /> : null }
     </div>
   )
 }
