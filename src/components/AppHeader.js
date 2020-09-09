@@ -25,7 +25,7 @@ const AppHeader = () => {
         </IconButton>
       </div>
       <div className="header__row">
-        <label for="header__checkbox" id="header__label">
+        <label htmlFor="header__checkbox" id="header__label">
           <input id="header__checkbox" type="checkbox" onChange={() => dispatch(toggleDisplayDoneTodos())} />
           <span id="header__checkbox-customed"></span>
           Tout afficher

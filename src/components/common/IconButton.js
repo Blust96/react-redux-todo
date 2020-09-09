@@ -6,7 +6,7 @@ const IconButton = props => {
   const { onClick, style, disabled = false } = props;
 
   return (
-    <button onClick={onClick} class="icon-button" style={style} disabled={disabled}>
+    <button onClick={onClick} className="icon-button" style={style} disabled={disabled}>
       { props.children }
     </button>
   )

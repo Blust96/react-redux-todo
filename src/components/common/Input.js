@@ -15,7 +15,7 @@ const TodoInput = props => {
     }
   }
  
-  return <input class="input" type='text' placeholder="ex: To meow" onKeyDown={handleKeyDown} onChange={handleChange} value={value} />
+  return <input className="input" type='text' placeholder="ex: To meow" onKeyDown={handleKeyDown} onChange={handleChange} value={value} />
 }
 
 export default TodoInput;
