@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Plus, Shuffle } from 'react-bootstrap-icons';
 
 import { IconButton, Input } from './common';
-import { addTodo, addRandomTodo, toggleDisplayDoneTodos } from '../store/todosSlice';
+import { addTodo, addRandomTodo, toggleDisplayDoneTodos } from '../store/todos/todosActions';
 import './AppHeader.css';
 
 const AppHeader = () => {
