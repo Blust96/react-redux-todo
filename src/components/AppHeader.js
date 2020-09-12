@@ -20,7 +20,7 @@ const AppHeader = () => {
       <h1 className="header__title">Todo-List</h1>
       <div className="header__row">
         <Input submit={submit} setValue={setValue} value={value} />
-        <IconButton onClick={() => submit()} style={{ backgroundColor: 'var(--secondary-color)' }} disabled={value === ''}>
+        <IconButton onClick={submit} style={{ backgroundColor: 'var(--secondary-color)' }} disabled={value === ''}>
           <Plus size={20} />
         </IconButton>
       </div>
