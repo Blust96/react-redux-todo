@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Plus, Shuffle } from 'react-bootstrap-icons';
 
 import { IconButton, Input } from './common';
-import { addTodo, addRandomTodo, toggleDisplayDoneTodos } from '../store/todosSlice';
+import { addTodo, addRandomTodo, toggleDisplayDoneTodos } from '../store/todos/todosActions';
 import './AppHeader.css';
 
 const AppHeader = () => {
@@ -20,7 +20,7 @@ const AppHeader = () => {
       <h1 className="header__title">Todo-List</h1>
       <div className="header__row">
         <Input submit={submit} setValue={setValue} value={value} />
-        <IconButton onClick={() => submit()} style={{ backgroundColor: 'var(--secondary-color)' }} disabled={value === ''}>
+        <IconButton onClick={submit} style={{ backgroundColor: 'var(--secondary-color)' }} disabled={value === ''}>
           <Plus size={20} />
         </IconButton>
       </div>

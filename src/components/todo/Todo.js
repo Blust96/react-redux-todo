@@ -4,7 +4,7 @@ import { X, Check, TrashFill } from 'react-bootstrap-icons';
 
 import TodoBox from './TodoBox';
 import { IconButton } from '../common';
-import { toggleTodo, updateTodo, deleteTodo } from '../../store/todosSlice';
+import { toggleTodo, updateTodo, deleteTodo } from '../../store/todos/todosActions';
 import { getFormattedDate } from '../../utils/getFormattedDate';
 import './Todo.css';
 
