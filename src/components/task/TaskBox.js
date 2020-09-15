@@ -4,11 +4,11 @@ import { PencilFill } from 'react-bootstrap-icons';
 import { IconButton, Input } from '../common';
 import { getRandomCatImage } from '../../api/meowApi';
 import spinner from '../../assets/spinner.gif';
-import './TodoBox.css';
+import './TaskBox.css';
 
-const TodoBox = props => {
-  const { dispatchUpdate, todo } = props;
-  const { description } = todo;
+const TaskBox = props => {
+  const { dispatchUpdate, task } = props;
+  const { description } = task;
 
   const [isLoading, setIsLoading] = useState(true);
   const [catImageUrl, setCatImageUrl] = useState('');
@@ -31,17 +31,17 @@ const TodoBox = props => {
   }, []);
 
   return (
-    <div className="todo__box">
+    <div className="task__box">
       <h3>Modifier la description :</h3>
-      <div className="todo__input">
+      <div className="task__input">
         <Input submit={submit} setValue={setValue} value={value} />
         <IconButton onClick={submit} style={{ backgroundColor: 'white' }} disabled={value === ''} >
           <PencilFill size={20} />
         </IconButton>
       </div>
-      { isLoading ? <img className="todo__image" src={spinner} alt="Chargement en cours !"/> : <img className="todo__image" src={catImageUrl} alt="Un chat !"/> }
+      { isLoading ? <img className="task__image" src={spinner} alt="Chargement en cours !"/> : <img className="task__image" src={catImageUrl} alt="Un chat !"/> }
     </div>
   )
 }
 
-export default TodoBox;
+export default TaskBox;
