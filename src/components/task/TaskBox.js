@@ -34,7 +34,7 @@ const TaskBox = props => {
     <div className="task__box">
       <h3>Modifier la description :</h3>
       <div className="task__input">
-        <Input submit={submit} setValue={setValue} value={value} />
+        <Input submit={submit} setValue={setValue} value={value} placeholder="ex: To meow" />
         <IconButton onClick={submit} style={{ backgroundColor: 'white' }} disabled={value === ''} >
           <PencilFill size={20} />
         </IconButton>

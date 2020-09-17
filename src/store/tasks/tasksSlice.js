@@ -4,6 +4,7 @@ export const initialState = {
   isLoading: false,
   displayDoneTasks: false,
   displayTaskDate: false,
+  todoId: 0,
   taskList: [],
 }
 
@@ -14,8 +15,12 @@ const tasksSlice = createSlice({
     isLoading: state => {
       state.loading = true;
     },
+
+    setTodoId: (state, { payload }) => {
+      state.todoId = payload;
+    },
     
-    setTasks: (state, { payload }) => {
+    setTaskList: (state, { payload }) => {
       state.taskList = payload;
       state.loading = false;
     },
@@ -26,5 +31,5 @@ const tasksSlice = createSlice({
   },
 })
 
-export const { isLoading, setTasks, toggleDisplayDoneTasks } = tasksSlice.actions;
+export const { isLoading, setTaskList, setTodoId, toggleDisplayDoneTasks } = tasksSlice.actions;
 export default tasksSlice.reducer;

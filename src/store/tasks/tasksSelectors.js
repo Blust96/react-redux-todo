@@ -7,3 +7,5 @@ export const getFilteredTaskList = state => {
     return state.tasks.taskList.filter(task => !task.done);
   }
 }
+
+export const getTodoId = state => state.tasks.todoId;

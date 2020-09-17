@@ -1,17 +1,8 @@
 import { v4 as uuid } from 'uuid';
 
-import { fetchLocalTodos, setLocalTodos } from '../../api/todosApi';
 import { getRandomDescription } from '../../utils/getRandomDescription';
-import { isLoading, setTasks, toggleDisplayDoneTasks } from './tasksSlice';
-
-const fetchTasks = () => {
-  return dispatch => {
-    dispatch(isLoading());
-
-    const taskList = fetchLocalTodos();
-    dispatch(setTasks(taskList));
-  }
-}
+import { isLoading, setTaskList, setTodoId, toggleDisplayDoneTasks } from './tasksSlice';
+import { updateTodo } from '../todos/todosActions';
 
 const addTask = description => {
   return (dispatch, getState) => {
@@ -25,8 +16,8 @@ const addTask = description => {
     }
     const taskList = [task, ...tasks.taskList];
 
-    setLocalTodos(taskList);
-    dispatch(setTasks(taskList));
+    dispatch(updateTodo(tasks.todoId, { taskList }));
+    dispatch(setTaskList(taskList));
   }
 }
 
@@ -52,8 +43,8 @@ const updateTask = (id, description) => {
       return task;
     });
 
-    setLocalTodos(taskList);
-    dispatch(setTasks(taskList));
+    dispatch(updateTodo(tasks.todoId, { taskList }));
+    dispatch(setTaskList(taskList));
   }
 }
 
@@ -64,8 +55,8 @@ const deleteTask = id => {
 
     const taskList = tasks.taskList.filter(task => task.id !== id);
 
-    setLocalTodos(taskList);
-    dispatch(setTasks(taskList));
+    dispatch(updateTodo(tasks.todoId, { taskList }));
+    dispatch(setTaskList(taskList));
   }
 }
 
@@ -86,14 +77,15 @@ const toggleTask = id => {
        }
     });
 
-    setLocalTodos(taskList);
-    dispatch(setTasks(taskList));
+    dispatch(updateTodo(tasks.todoId, { taskList }));
+    dispatch(setTaskList(taskList));
   }
 }
 
 export {
+  setTaskList,
+  setTodoId,
   toggleDisplayDoneTasks,
-  fetchTasks,
   addTask,
   addRandomTask,
   updateTask,

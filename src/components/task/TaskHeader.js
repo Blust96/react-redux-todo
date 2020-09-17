@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Plus, Shuffle } from 'react-bootstrap-icons';
 
-import { IconButton, Input } from './common';
-import { addTask, addRandomTask, toggleDisplayDoneTasks } from '../store/tasks/tasksActions';
-import './AppHeader.css';
+import { IconButton, Input } from '../common';
+import { addTask, addRandomTask, toggleDisplayDoneTasks } from '../../store/tasks/tasksActions';
+import './TaskHeader.css';
 
-const AppHeader = () => {
+const TaskHeader = () => {
   const [value, setValue] = useState('');
   const dispatch = useDispatch();
 
@@ -17,9 +17,8 @@ const AppHeader = () => {
 
   return (
     <header className="header">
-      <h1 className="header__title">Task-List</h1>
       <div className="header__row">
-        <Input submit={submit} setValue={setValue} value={value} />
+        <Input submit={submit} setValue={setValue} value={value} placeholder="ex: To meow" />
         <IconButton onClick={submit} style={{ backgroundColor: 'var(--secondary-color)' }} disabled={value === ''}>
           <Plus size={20} />
         </IconButton>
@@ -38,4 +37,4 @@ const AppHeader = () => {
   )
 }
 
-export default AppHeader;
+export default TaskHeader;

@@ -1,0 +1,28 @@
+.todos__link {
+  cursor: pointer;
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 15px;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+
+.todos__link:hover {
+  background-color: var(--secondary-color);
+}
+
+.todos__link-active, .todos__link-active:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.todos__buttons {
+  display: flex;
+}
