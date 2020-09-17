@@ -1,38 +1,66 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { X, Check, TrashFill } from 'react-bootstrap-icons';
+import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { TrashFill, PencilFill } from 'react-bootstrap-icons';
 
-import TodoBox from './TodoBox';
-import { IconButton } from '../common';
-import { toggleTodo, updateTodo, deleteTodo } from '../../store/todos/todosActions';
-import { getFormattedDate } from '../../utils/getFormattedDate';
+import { IconButton, Input } from '../common';
+import { setCurrentTodo, deleteTodo, updateTodo } from '../../store/todos/todosActions';
+import { getTodoListCount } from '../../store/todos/todosSelectors';
+import { getTodoId } from '../../store/tasks/tasksSelectors';
 import './Todo.css';
 
 const Todo = props => {
   const { todo } = props;
-  const { id, description, done, doneAt = null } = todo;
+  const { id, name } = todo;
+
+  const inputEl = useRef(null);
+  const [isEditable, setIsEditable] = useState(false);
+  const [value, setValue] = useState(name);
+
+  const todoListCount = useSelector(getTodoListCount);
+  const currentTodoId = useSelector(getTodoId);
+  const isActive = id === currentTodoId;
 
   const dispatch = useDispatch();
-  const dispatchUpdate = value => {
-    dispatch(updateTodo(id, value));
+
+  const toggleInput = () => {
+    setIsEditable(!isEditable);
   }
 
-  const [isBoxActive, setIsBoxActive] = useState(false);
+  const submit = () => {
+    dispatch(updateTodo(id, { name: value }));
+    setIsEditable(false);
+  }
+
+  useEffect(() => {
+    if (isEditable) {
+      inputEl.current.focus();
+    }
+  }, [isEditable])
+
+  const renderContent = () => (
+    <>
+      { name }
+      <div className="todos__buttons">
+        <IconButton onClick={toggleInput} style={{ backgroundColor: 'white' }} >
+          <PencilFill size={20} />
+        </IconButton>
+        { todoListCount > 1 ? (
+          <IconButton onClick={() => dispatch(deleteTodo(id))} style={{ backgroundColor: 'var(--secondary-color)' }}>
+            <TrashFill size={20} />
+          </IconButton>
+        ) : null }
+      </div>
+    </>
+  );
 
   return (
-    <div className={`todos__item${ done ? ' todos__item-done' : ''}`}>
-      <div className="todos__content">
-        <p className="todos__description" onClick={() => setIsBoxActive(!isBoxActive)}>{ description }</p>
-        <IconButton onClick={() => dispatch(toggleTodo(id))} style={{ backgroundColor: 'var(--primary-color)' }}>
-          { done ? <X size={20} /> : <Check size={20} /> }
-        </IconButton>
-        <IconButton onClick={() => dispatch(deleteTodo(id))} style={{ backgroundColor: 'var(--secondary-color)' }}>
-          <TrashFill size={20} />
-        </IconButton>
-      </div>
-      { doneAt ? <p className="todos__date">Fais le { getFormattedDate(doneAt) }</p> : null}
-      { isBoxActive ? <TodoBox todo={todo} dispatchUpdate={dispatchUpdate} /> : null }
-    </div>
+    <li onClick={() => !isEditable ? dispatch(setCurrentTodo(id)) : null} className={`todos__link${isActive ? ' todos__link-active' : ''}`}>
+      { 
+        !isEditable ?
+          renderContent()
+          : <Input submit={submit} setValue={setValue} value={value} placeholder="ex: Meow list" inputRef={inputEl} /> 
+      }
+    </li>
   )
 }
 

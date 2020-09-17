@@ -1,7 +1,3 @@
-.todos {
-  display: flex;
-  flex-direction: column;
+.todos__list {
   width: 100%;
-  padding: 20px;
-  background-color: var(--primary-color);
 }

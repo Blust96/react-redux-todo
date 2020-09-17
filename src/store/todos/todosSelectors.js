@@ -1,9 +1,2 @@
-export const getTodosState = state => state.todos;
-
-export const getFilteredTodoList = state => {
-  if (state.todos.displayDoneTodos)
-    return state.todos.todoList;
-  else {
-    return state.todos.todoList.filter(todo => !todo.done);
-  }
-}
+export const getTodoList = state => state.todos.todoList;
+export const getTodoListCount = state => state.todos.todoList.length;
